@@ -1,18 +1,21 @@
-describe('userDetailsCtrl', function() {
-  var $ctrlCnst;
+
+describe('userDetailsCtrlCtrl', function() {
+  var $ctrlCnst; 
   
   beforeEach(module('app'));
   
-  beforeEach(inject(function($componentController) {
-    $ctrlCnst = $componentController;
+  beforeEach(inject(function($controller) {
+    $ctrlCnst = $controller;
   }));
   
   it('should set the user on the controller to the matching user by id', function() {
-    var ctrl = $ctrlCnst('userDetails', 
-      { $routeParams: {id: 23}}, // locals
-      {allUsers: [{id:23, name:'yes'},{id:4, name: 'no'}]} // bindings
-    )
+    
+    var ctrl = $ctrlCnst('userDetailsCtrl',
+      {
+        allUsers: [{id:1,name:'wrong'},{id:3,name:'correct'}], 
+        '$routeParams': {id:3}
+      })
       
-    expect(ctrl.user.name).toBe('yes');
+    expect(ctrl.user.name).toBe('correct');
   })
 })
