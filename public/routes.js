@@ -30,26 +30,21 @@ app.config(function($routeProvider) {
   
   $routeProvider
     .when('/admin/login', {
-      controller: 'adminLoginCtrl',
-      templateUrl: 'admin/adminLogin.html',
+      template: '<admin-login></admin-login>',
       controllerAs: '$ctrl',
       resolve: {
         currentAuth: routeResolvers.waitForAuth
       }
     })
     .when('/admin/results', {
-      controller: 'resultsCtrl',
-      templateUrl: 'admin/results.html',
-      controllerAs: 'vm',
+      template: '<results all-sessions="$resolve.allSessions"></results>',
       resolve: {
         admin: routeResolvers.requireAdmin,
         allSessions: routeResolvers.allSessions
       }
     })
     .when('/admin/users/:id', {
-      controller: 'userDetailsCtrl',
-      templateUrl: 'admin/userDetails.html',
-      controllerAs: 'vm',
+      template: '<user-details all-users="$resolve.allUsers"></user-details>',
       resolve: {
         admin: routeResolvers.requireAdmin,
         allUsers: routeResolvers.allUsers
@@ -58,7 +53,6 @@ app.config(function($routeProvider) {
     .when('/users', {
       controller: 'userListCtrl',
       templateUrl: 'admin/userlist.html',
-      controllerAs: 'vm',
       resolve: {
         admin: routeResolvers.requireAdmin,
         allUsers: routeResolvers.allUsers
@@ -73,8 +67,7 @@ app.config(function($routeProvider) {
       }
     })
     .when('/home', {
-      controller: 'homeCtrl',
-      templateUrl: 'home/home.html',
+      template: '<home user-sessions="$resolve.userSessions"></home>',
       controllerAs: 'vm',
       resolve: {
         login:routeResolvers.loggedIn,
